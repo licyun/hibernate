@@ -1,6 +1,6 @@
 #使用hibernate及连接池操作数据库
 ##hibernate说明：由于java语言是面向对象的，而mysql是关系型数据库。无法用面向对象的方法来操作mysql数据库，所以引入hibernate这一中间插件，程序员无需知道底层数据库是什么以及如何操作，只需用面向对象的方法操作hibernate的持久化类，hibernate自动将这些方法转化为数据库的操作。
-###1.引入连接池包在hibernate.cfg.xml中配置数据库连接信息
+###1.引入连接池包在hibernate.cfg.xml中配置数据库连接信息,连接池的好处在于无需多次连接和断开数据库，从连接池获取连接，用完后交还给连接池，无需断开。
 ```xml
   <hibernate-configuration>
 	<session-factory>
@@ -52,29 +52,29 @@
 	</class>
 </hibernate-mapping>
 ```
-###3.java中Configuration调用hibernate方法
+###3.java中Configuration的session来对数据库进行持久化操作。
 ```java
-  //实例化Configuration，
-		Configuration conf = new Configuration()
-		//下面方法默认加载hibernate.cfg.xml文件
-			.configure();
-		//以Configuration创建SessionFactory
-		SessionFactory sf = conf.buildSessionFactory();
-		//创建Session
-		Session sess = sf.openSession();
-		//开始事务
-		Transaction tx = sess.beginTransaction();
-		//创建消息实例
-		News n = new News();
-		//设置消息标题和消息内容
-		n.setTitle("疯狂Java联盟成立了");
-		n.setContent("疯狂Java联盟成立了，"
-			+ "网站地址http://www.crazyit.org");
-		//保存消息
-		sess.save(n);
-		//提交事务
-		tx.commit();
-		//关闭Session
-		sess.close();
-		sf.close();
+  	//实例化Configuration，
+	Configuration conf = new Configuration()
+	//下面方法默认加载hibernate.cfg.xml文件
+		.configure();
+	//以Configuration创建SessionFactory
+	SessionFactory sf = conf.buildSessionFactory();
+	//创建Session
+	Session sess = sf.openSession();
+	//开始事务
+	Transaction tx = sess.beginTransaction();
+	//创建消息实例
+	News n = new News();
+	//设置消息标题和消息内容
+	n.setTitle("疯狂Java联盟成立了");
+	n.setContent("疯狂Java联盟成立了，"
+		+ "网站地址http://www.crazyit.org");
+	//保存消息
+	sess.save(n);
+	//提交事务
+	tx.commit();
+	//关闭Session
+	sess.close();
+	sf.close();
 ```
