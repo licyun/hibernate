@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="hibernateHqlQuery"
+  id="myeclipse.1473661536218"
+  context-root="/hibernateHqlQuery"
+  j2ee-spec="6.0"
+  archive="hibernateHqlQuery.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
